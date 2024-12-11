@@ -7,13 +7,12 @@ export const registerUser = async (req, res) => {
         if (!name || !email || !password || !phone || !address)
             console.log("some field is missing");
 
-        const isExisting = userModel.findOne({ email });
+        const isExisting = await userModel.findOne({ email });
         if (isExisting) {
             console.log("user already exists");
             return res.status(200).send({
                 success: true,
                 message: "user already exists",
-                user,
             });
         }
 
@@ -21,7 +20,7 @@ export const registerUser = async (req, res) => {
         const user = await userModel({
             name, email, password: hashedPassword, phone, address,
         });
-        user.save()
+        await user.save()
         return res.status(201).send({
             sucess: true,
             message: "user created",

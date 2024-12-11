@@ -13,8 +13,8 @@ app.get("/", (req, res) => {
     res.send("<h1>HI WELCOME<h1>");
 })
 
-app.use(cors);
-app.use(express.json);
+app.use(cors());
+app.use(express.json());
 app.use(morgan("dev"));
 
 // routes
@@ -25,4 +25,4 @@ const PORT = 3000 || process.env.PORT;
 app.listen(PORT, () => {
     console.log(`got connected to ${PORT}`.green);
 })
-await ConnectDb();
+ConnectDb();
